@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<!-- Compatibilidad con moviles -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="../index.css">
+
+	<!-- favicon -->
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	
+	<title>Halter-Cross | Crossfit Almendralejo</title>
+
+	<style>
+		
+		#brand-image {
+			height: 34px;
+		}
+
+		#phoneInfo {
+			color: white;
+		}
+
+	</style>
+</head>
+
+<body>
+
+		<header>
+			<div>
+				<h1><small> HALTER CROSS</small></h1>
+			</div>
+		</header>
+
+		<nav class="navbar navbar-inverse">
+	  		<div class="container-fluid">
+	    		<div class="navbar-header">
+			      			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        				<span class="icon-bar"></span>
+			        				<span class="icon-bar"></span>
+			        				<span class="icon-bar"></span> 
+			      			</button>
+							<a class="navbar-brand" href="index.html">
+								<img id="brand-image" src="../img/seaway_crossfit_logo.png" alt="website logo">
+							</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+			      		<li class="active"><a href="index.html">Home</a></li>
+			      		<li class="dropdown">
+			       			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Sobre nosotros
+			        		<span class="caret"></span></a>
+			       			<ul class="dropdown-menu">
+			          			<li><a href="instalaciones.html">Nuestras instalaciones</a></li>
+			          			<li><a href="#">Monitores</a></li>
+			          			<li><a href="localizacion.html">Localización</a></li>	
+			        		</ul> 	 	
+			      		</li>
+						<li class="active"><a href="tarifas.html">Tarifas</a></li>
+						<li class="active"><a href="noticias.html">Noticias</a></li>
+					</ul>
+		
+				<form id="acceder" class="navbar-form navbar-right">
+					<a href="acceso.html" class="btn btn-info" role="button">Acceder</a>
+				</form>	
+
+				<form id="contactar" class="navbar-form navbar-right">
+					<a href="formulario.html" class="btn btn-info" role="button">Contactar</a>
+
+				</form>		
+		
+					</div>
+				</div>
+		</div>
+		</nav>
+
+		<section>
+
+			<div id="mensajecorrecto" class="alert alert-info">
+			<strong>Por favor introduzca su usuario y contraseña.</strong>
+			</div>
+
+			<div id="formularioRegistro" class="container" style="background-image: url('../img/fondoInfo.jpg');">
+				<form id="formulario" method="post" action="../php/mandarEmail.php" name="formulario" onsubmit="return(validarDatos());">
+				  <div class="form-group row">
+				  	<div class="col-md-4 col-md-offset-4">
+
+				  	
+
+				  		<label for="email">Dirección email:</label>
+				    	<input type="email" class="form-control" name="email" id="email">
+				  	</div>
+				  </div>
+
+				
+				   <div class="form-group row">
+				  	<div class="col-md-4 col-md-offset-4">
+				  		<label for="nombre">Nombre:</label>
+				    	<input type="text" class="form-control" name="nombre" id="nombre">
+				  	</div>
+				  </div>
+				  
+					<div class="form-group row">
+					  <div class="col-md-4 col-md-offset-4">
+						  <label for="apellido">Apellido:</label>
+						  <input type="text" class="form-control" name="apellido" id="apellido">
+					  </div>
+				    </div>
+
+				    <div class="form-group row">
+					  <div class="col-md-4 col-md-offset-4">
+						  <label for="telefono">Telefono (Opcional):</label>
+						  <input type="text" class="form-control" name="telefono" id="telefono">
+					  </div>
+				    </div>
+
+				    <div class="form-group row">
+					  <div class="col-md-4 col-md-offset-4">
+						  <label for="consulta">Consulta:</label>
+						  <textarea class="form-control" rows="5" name="consulta" id="consulta"></textarea>
+					  </div>
+				    </div>
+				  
+ 				<div id="boton_enviar" class="col-md-4 col-md-offset-4">
+				  	<button type="submit" class="btn btn-default">Enviar</button>
+				</div>
+				</form>
+
+			</div>
+			
+
+		<script>
+			// this is the id of the form
+			$("#formulario").submit(function(e) {
+
+		    var url = "../php/mandarEmail.php"; // the script where you handle the form input.
+
+		    $.ajax({
+		           type: "POST",
+		           url: url,
+		           data: $("#formulario").serialize(), // serializes the form's elements.
+		           success: function(data)
+		           {
+		            //alert(data); // show response from the php script.
+		           	document.getElementById("mensajecorrecto").innerHTML = "<strong>" + data + "</strong>";
+		           }
+		         });
+
+		    e.preventDefault(); // avoid to execute the actual submit of the form.
+		});
+
+		</script>
+
+
+		</section>
+
+		<script>
+
+			function validarEmail() {
+				var x = document.forms["formulario"]["email"].value;
+    			var atpos = x.indexOf("@");
+			    var dotpos = x.lastIndexOf(".");
+			    
+			    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+			        alert("Esa direccion de email no es valida.");
+			        document.formulario.email.focus();
+			        return false;
+			    }
+			}
+
+			function validarDatos() {
+
+				if (document.formulario.email.value == "") {
+					alert("Por favor introduzca su email.");
+					document.formulario.email.focus();
+					return false;
+				}
+				else  
+					validarEmail();
+		
+				if (document.formulario.nombre.value == "") {
+					alert("Por favor introduzca su nombre.");
+					document.formulario.nombre.focus();
+					return false;
+				}
+
+				if (document.formulario.apellido.value == "") {
+					alert("Por favor introduzca su apellido.");
+					document.formulario.apellido.focus();
+					return false;
+				}
+				
+				if (document.formulario.telefono.value != "") {
+					if (isNaN(document.formulario.telefono.value) || document.formulario.telefono.value.length > 9) { 
+						alert("Número no introducido o longitud excesiva.");
+						document.formulario.telefono.focus();
+						return false;
+					}
+				}
+
+				if (document.formulario.consulta.value == "") {
+					alert("Por favor especifique su consulta.");
+					document.formulario.consulta.focus();
+					return false;
+				}
+			}
+
+		</script>
+
+		<footer>
+			<!-- aria-hidden = "true" para mejorar la accesibilidad, esconde los iconos que son puramente decorativos -->
+			<div class="text-center">			
+						<a href="https://twitter.com/?lang=es" class="twitter">
+							<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+						</a>
+						
+						<a href="https://plus.google.com/about?hl=es" class="google">
+							<i class="fa fa-google-plus fa-2x" aria-hidden="true"></i>
+						</a>
+
+						<a href="https://www.facebook.com/pg/HalterCross/photos/?ref=page_internal" class="facebook">
+							<i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
+						</a>
+			</div>
+
+			<div class="text-center">
+						<div class="fb-like" 
+							data-href="https://www.facebook.com/pg/HalterCross/photos/?ref=page_internal" 
+							data-layout="standard" 
+							data-action="like" 
+							data-size="small" 
+							data-show-faces="true" 
+							data-share="true">
+						</div>	
+										
+						
+			</div>
+
+			<div id="textoFooter" class="text-center">
+				<h4><small>Halter Cross @ 2017</small><h4>
+			</div>
+		</footer>
+
+<!-- ====== Facebook share and like button ======-->
+		<div id="fb-root"></div>
+			<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.10";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+			</script>
+<!-- ====== /End Facebook share and like button ======-->
+</body>
+
+</html>
